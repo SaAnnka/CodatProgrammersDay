@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CodatFoodWebSite.Data;
 using CodatFoodWebSite.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CodatFoodWebSite.Pages.Categories
 {
+    [Authorize(Roles = "admin")]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;

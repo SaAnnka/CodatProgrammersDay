@@ -8,9 +8,9 @@ namespace CodatFoodWebSite.Pages.Plants
 {
     public class DeleteModel : PageModel
     {
-        private readonly CodatFoodWebSite.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
 
-        public DeleteModel(CodatFoodWebSite.Data.ApplicationDbContext context)
+        public DeleteModel(Data.ApplicationDbContext context)
         {
             _context = context;
         }

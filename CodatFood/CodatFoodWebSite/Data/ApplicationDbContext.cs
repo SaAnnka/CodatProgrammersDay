@@ -9,7 +9,7 @@ namespace CodatFoodWebSite.Data
             : base(options)
         {
         }
-        public DbSet<CodatFoodWebSite.Models.Category> Category { get; set; }
-        public DbSet<CodatFoodWebSite.Models.Plant> Plant { get; set; }
+        public DbSet<Models.Category> Category { get; set; }
+        public DbSet<Models.Plant> Plant { get; set; }
     }
 }

@@ -9,9 +9,9 @@ namespace CodatFoodWebSite.Pages.Plants
 {
     public class EditModel : PageModel
     {
-        private readonly CodatFoodWebSite.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
 
-        public EditModel(CodatFoodWebSite.Data.ApplicationDbContext context)
+        public EditModel(Data.ApplicationDbContext context)
         {
             _context = context;
         }

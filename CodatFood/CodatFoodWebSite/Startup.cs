@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using CodatFoodWebSite.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,43 +73,6 @@ namespace CodatFoodWebSite
             {
                 endpoints.MapRazorPages();
             });
-
-            CreateRoles(serviceProvider).Wait();
-        }
-
-        private async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            string[] roleNames = { "admin" };
-
-            foreach (var roleName in roleNames)
-            {
-                var roleExist = await roleManager.RoleExistsAsync(roleName);
-                if (!roleExist)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
-                }
-            }
-            
-            var powerUser = new IdentityUser
-            {
-                UserName = Configuration["AppSettings:AdminUserEmail"],
-                Email = Configuration["AppSettings:AdminUserEmail"],
-                EmailConfirmed = true
-            };
-
-            var userPwd = Configuration["AppSettings:AdminUserPassword"];
-            var user = await userManager.FindByEmailAsync(Configuration["AppSettings:AdminUserEmail"]);
-
-            if (user == null)
-            {
-                var createPowerUser = await userManager.CreateAsync(powerUser, userPwd);
-                if (createPowerUser.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(powerUser, "admin");
-                }
-            }
         }
     }
 }

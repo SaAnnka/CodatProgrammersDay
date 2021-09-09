@@ -52,8 +52,6 @@ namespace CodatFoodWebSite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Plant");
                 });
 

@@ -28,47 +28,44 @@ namespace CodatFoodWebSite.Models
                 context.Category.AddRange(
                     new Category
                     {
-                        Id = 1,
                         Name = "Vegetables"
                     },
                     new Category
                     {
-                        Id = 2,
                         Name = "Berries"
                     }
                 );
 
+                await context.SaveChangesAsync();
+
                 context.Plant.AddRange(
                     new Plant
                     {
-                        Id = 1,
                         Name = "Cucumber",
                         Description = "Cucumbers are very green",
-                        CategoryId = 1
+                        CategoryId = context.Category.Single(c => c.Name == "Vegetables").Id
                     },
                     new Plant
                     {
-                        Id = 2,
                         Name = "Tomato",
                         Description = "Tomatoes are very red",
-                        CategoryId = 1
+                        CategoryId = context.Category.Single(c => c.Name == "Vegetables").Id
                     },
                     new Plant
                     {
-                        Id = 3,
                         Name = "Blueberries",
                         Description = "Blueberries are very blue",
-                        CategoryId = 1
+                        CategoryId = context.Category.Single(c => c.Name == "Berries").Id
                     }
                 );
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 await CreateRoles(serviceProvider);
             }
         }
 
-        public static async Task CreateRoles(IServiceProvider serviceProvider)
+        private static async Task CreateRoles(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();

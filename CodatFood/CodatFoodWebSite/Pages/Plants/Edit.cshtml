@@ -1,4 +1,5 @@
 ﻿@page
+@using CodatFoodWebSite.Models
 @model CodatFoodWebSite.Pages.Plants.EditModel
 
 @{
@@ -14,6 +15,12 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Plant.Id" />
+            <select asp-for="Plant.CategoryId" class="form-control" value="@Model.Plant.CategoryId">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
             <div class="form-group">
                 <label asp-for="Plant.Name" class="control-label"></label>
                 <input asp-for="Plant.Name" class="form-control" />

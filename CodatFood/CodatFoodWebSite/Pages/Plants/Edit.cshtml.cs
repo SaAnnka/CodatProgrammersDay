@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,6 +20,8 @@ namespace CodatFoodWebSite.Pages.Plants
         [BindProperty]
         public Plant Plant { get; set; }
 
+        public List<Category> Categories { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -27,6 +30,7 @@ namespace CodatFoodWebSite.Pages.Plants
             }
 
             Plant = await _context.Plant.FirstOrDefaultAsync(m => m.Id == id);
+            Categories = await _context.Category.ToListAsync();
 
             if (Plant == null)
             {
